@@ -1,0 +1,8 @@
+model/AccountsModel.class
+model/AdminUsersModel.class
+model/UtilityBillsModel.class
+model/TransactionsAuditModel.class
+model/UtilitiesModel.class
+model/BankTypesModel.class
+model/ClientsModel.class
+model/UtilitiesAuditTable.class
