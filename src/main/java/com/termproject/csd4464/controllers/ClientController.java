@@ -3,6 +3,8 @@
  */
 package com.termproject.csd4464.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.termproject.csd4464.dao.AccountsDao;
 import com.termproject.csd4464.dao.ClientDao;
+import com.termproject.csd4464.model.AccountsModel;
 import com.termproject.csd4464.model.ClientsModel;
 
 /**
@@ -27,6 +31,9 @@ public class ClientController {
 	
 	@Autowired
 	private ClientDao clientDao;
+	
+	@Autowired
+	private AccountsDao accountsDao;
 	
 	
 	@GetMapping("/login")
@@ -43,7 +50,7 @@ public class ClientController {
 		HttpSession session = request.getSession(false);
 		String sessionClientUserName = (String) session.getAttribute("clientUserName");
 		
-		if(!sessionClientUserName.isBlank()) {
+		if(sessionClientUserName!= null && !sessionClientUserName.isBlank()) {
 			return "redirect:/client/home";
 		}
 		
@@ -51,6 +58,8 @@ public class ClientController {
 		
 		boolean isValidClient = clientDao.isValidClient(clientsModel.getUsername(), clientsModel.getPassword());
 		if(!isValidClient) {
+			System.out.println("Invalid Credentials.");
+			m.addAttribute("message", "Invalid Credentials.");
 			return "redirect:/client/login";
 		}
 		session.setAttribute("clientUserName", clientsModel.getUsername());
@@ -65,18 +74,25 @@ public class ClientController {
 	public String getClientHomePage(Model m, HttpServletRequest request) {
 		System.out.println("getClientHomePage() begins");
 		
-		HttpSession session = request.getSession(false);
-		String sessionClientUserName = (String) session.getAttribute("clientUserName");
-		
-		if(sessionClientUserName.isBlank()) {
-			m.addAttribute("message", "Please Login first!!!");
-			return "redirect:/client/login";
+		try {
+			HttpSession session = request.getSession(false);
+			String sessionClientUserName = (String) session.getAttribute("clientUserName");
+			if (sessionClientUserName == null || sessionClientUserName.isBlank()) {
+				m.addAttribute("message", "Please Login first!!!");
+				return "redirect:/client/login";
+			}
+			ClientsModel clientsModel = clientDao.getClientsDetailByUsername(sessionClientUserName);
+			m.addAttribute("clientsModel", clientsModel);
+			
+			List<AccountsModel> accountsModels = accountsDao.getAccountByClientId(clientsModel.getClientId());
+			m.addAttribute("accountsModels", accountsModels);
+			return "client/ClientHome";
+		} catch (Exception e) {
+			System.out.println("Exception occurred in getClientHomePage(): " + e.getMessage()+ e);
 		}
-		
-		ClientsModel clientsModel = clientDao.getClientsDetailByUsername(sessionClientUserName);
-		m.addAttribute("clientsModel", clientsModel);
-		
-		return "ClientHome";
+		return "redirect:/client/login";
 	}
+	
+	
 
 }

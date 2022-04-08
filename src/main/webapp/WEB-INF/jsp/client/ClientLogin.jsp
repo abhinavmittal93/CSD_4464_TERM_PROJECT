@@ -17,9 +17,10 @@
 </head>
 <body align="center">
 	<h1>Client Login</h1>
+	<span style="color: red;"><c:out value="${param.message}"/></span>
 	<hr>
 	<div class="middle">
-		<form:form method="post" action="client/login">
+		<form:form method="post" action="${pageContext.request.contextPath}/client/login">
 			<table>
 				<tr>
 					<td>

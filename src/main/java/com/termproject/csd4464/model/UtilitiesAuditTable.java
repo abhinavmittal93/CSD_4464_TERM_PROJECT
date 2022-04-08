@@ -19,6 +19,10 @@ public class UtilitiesAuditTable {
 
 	private Date paidOn;
 
+	private String status;
+
+	private String reasonCode;
+
 	/**
 	 * @return the utilityAuditId
 	 */
@@ -73,6 +77,34 @@ public class UtilitiesAuditTable {
 	 */
 	public void setPaidOn(Date paidOn) {
 		this.paidOn = paidOn;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	/**
+	 * @return the reasonCode
+	 */
+	public String getReasonCode() {
+		return reasonCode;
+	}
+
+	/**
+	 * @param reasonCode the reasonCode to set
+	 */
+	public void setReasonCode(String reasonCode) {
+		this.reasonCode = reasonCode;
 	}
 
 }

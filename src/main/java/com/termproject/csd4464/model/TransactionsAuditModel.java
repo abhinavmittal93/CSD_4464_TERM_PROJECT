@@ -23,6 +23,10 @@ public class TransactionsAuditModel {
 
 	private Double transactionAmount;
 
+	private String status;
+
+	private String reasonCode;
+
 	/**
 	 * @return the transactionId
 	 */
@@ -105,6 +109,34 @@ public class TransactionsAuditModel {
 	 */
 	public void setTransactionAmount(Double transactionAmount) {
 		this.transactionAmount = transactionAmount;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	/**
+	 * @return the reasonCode
+	 */
+	public String getReasonCode() {
+		return reasonCode;
+	}
+
+	/**
+	 * @param reasonCode the reasonCode to set
+	 */
+	public void setReasonCode(String reasonCode) {
+		this.reasonCode = reasonCode;
 	}
 
 }

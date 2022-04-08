@@ -11,7 +11,7 @@ public class BankTypesModel {
 
 	private Long bankTypeId;
 
-	private String banktype;
+	private String bankType;
 
 	/**
 	 * @return the bankTypeId
@@ -30,15 +30,15 @@ public class BankTypesModel {
 	/**
 	 * @return the banktype
 	 */
-	public String getBanktype() {
-		return banktype;
+	public String getBankType() {
+		return bankType;
 	}
 
 	/**
 	 * @param banktype the banktype to set
 	 */
-	public void setBanktype(String banktype) {
-		this.banktype = banktype;
+	public void setBankType(String banktype) {
+		this.bankType = banktype;
 	}
 
 }

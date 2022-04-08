@@ -12,6 +12,8 @@ import java.sql.Date;
 public class AccountsModel {
 
 	private Long accountId;
+	
+	private String accountNo;
 
 	private ClientsModel clientsModel;
 
@@ -35,6 +37,22 @@ public class AccountsModel {
 	 */
 	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
+	}
+	
+	
+
+	/**
+	 * @return the accountNo
+	 */
+	public String getAccountNo() {
+		return accountNo;
+	}
+
+	/**
+	 * @param accountNo the accountNo to set
+	 */
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
 	}
 
 	/**
@@ -105,6 +123,13 @@ public class AccountsModel {
 	 */
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+
+	@Override
+	public String toString() {
+		return "AccountsModel [accountId=" + accountId + ", accountNo=" + accountNo + ", clientsModel=" + clientsModel
+				+ ", bankTypesModel=" + bankTypesModel + ", balance=" + balance + ", createdDate=" + createdDate
+				+ ", updatedDate=" + updatedDate + "]";
 	}
 
 }
