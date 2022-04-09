@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add New Account</title>
+<title>Create Utility Bills</title>
 <%@include file="AdminMenu.jsp" %>
 <style type="text/css">
 	.middle {
@@ -17,10 +17,10 @@
 </style>
 </head>
 <body align="center">
-	<h1>Add New Account</h1>
+	<h1>Create Utility Bills</h1>
 	<hr>
 	<div class="middle">
-		<form:form method="post" action="${pageContext.request.contextPath}/admin/accounts/create">
+		<form:form method="post" action="${pageContext.request.contextPath}/admin/utilities/bills/create">
 			<table>
 				<tr>
 					<td>
@@ -33,12 +33,12 @@
 				</tr>
 				<tr>
 					<td>
-						Account Type
+						Utility
 					</td>
 					<td>
-						<select name="bankTypesModel.bankTypeId" required>
-							<c:forEach items="${bankTypesModels}" var="bankTypesModel">
-								<option value="${bankTypesModel.bankTypeId}">${bankTypesModel.bankType}</option>
+						<select name="utilitiesModel.utilityId" required>
+							<c:forEach items="${utilitiesModels}" var="utilitiesModel">
+								<option value="${utilitiesModel.utilityId}">${utilitiesModel.utilityType} - ${utilitiesModel.utilityName}</option>
 							</c:forEach>
 						</select>
 					</td>

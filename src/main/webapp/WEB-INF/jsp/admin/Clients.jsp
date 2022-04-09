@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Clients</title>
+<%@include file="AdminMenu.jsp" %>
 <style type="text/css">
 	.middle {
       display: table;
@@ -25,6 +26,14 @@
 <body align="center">
 	<div style="text-align: center;">
 		<h1>Clients</h1>
+		<c:choose>
+			<c:when test="${param.status eq 'success'}">
+				<span style="color:green;"><c:out value="${param.message}"/></span>
+			</c:when>
+			<c:otherwise>
+				<span style="color:red;"><c:out value="${param.message}"/></span>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<div>
 		<table class="center" style="width:100%">
@@ -38,7 +47,7 @@
 			<c:forEach items="${clientsModels}" var="clientsModel">
 			    <tr>
 					<td>
-						<a href="accounts/${clientsModel.clientId}">${clientsModel.firstName} ${clientsModel.lastName}</a>
+						<a href="${pageContext.request.contextPath}/admin/client/details/${clientsModel.clientId}">${clientsModel.firstName} ${clientsModel.lastName}</a>
 					</td>
 					<td>
 						<c:choose>

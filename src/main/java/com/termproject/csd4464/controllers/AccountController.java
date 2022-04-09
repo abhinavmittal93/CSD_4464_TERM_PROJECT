@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,20 +41,23 @@ public class AccountController {
 	@Autowired
 	private AccountsDao accountsDao;
 
-	@GetMapping("/{clientId}")
-	public String getAccountsPageForClient(Model m, HttpServletRequest request, @PathVariable Long clientId) {
-		System.out.println("getAccountsPageForClient(): begins, clientId: " + clientId);
-		List<AccountsModel> accountsModels = accountsDao.getAccountByClientId(clientId);
-		ClientsModel clientsModel = clientDao.getClientsDetailById(clientId);
-		m.addAttribute("accountsModels", accountsModels);
-		m.addAttribute("clientsModel", clientsModel);
-		return "admin/Accounts";
-	}
-
 	@GetMapping("/create/{clientId}")
 	private String createAccountPage(Model m, HttpServletRequest request, @PathVariable Long clientId) {
 		System.out.println("createAccount:Get begins, clientId: " + clientId);
 		try {
+			
+			HttpSession session = request.getSession(false);
+			if(session == null) {
+				m.addAttribute("message", "Please Login first!!!");
+				return "redirect:/admin/login";
+			}
+			
+			Long sessionAdminUserId = (Long) session.getAttribute("adminId");
+			if (sessionAdminUserId == null) {
+				m.addAttribute("message", "Please Login first!!!");
+				return "redirect:/admin/login";
+			}
+			
 			ClientsModel clientsModel = clientDao.getClientsDetailById(clientId);
 			List<BankTypesModel> bankTypesModels = bankTypesDao.getBankTypes();
 
@@ -79,7 +83,7 @@ public class AccountController {
 			if (existingAccountModel != null) {
 				m.addAttribute("message", "This client has already an account with Account Type: "
 						+ bankTypesModel.getBankType());
-				return "redirect:/admin/accounts/" + accountsModel.getClientsModel().getClientId();
+				return "redirect:/admin/client/details/" + accountsModel.getClientsModel().getClientId();
 			}
 
 			Long clientId = accountsModel.getClientsModel().getClientId();
@@ -97,11 +101,12 @@ public class AccountController {
 			accountsModel.setUpdatedDate(sqlDate);
 			accountsDao.addAccount(accountsModel);
 			m.addAttribute("message", "Account created successfully.");
+			m.addAttribute("status", "success");
 		} catch (Exception e) {
 			System.err.println("Exception occurred in createAccount(): " + e.getMessage() + e);
 			m.addAttribute("message", "An error occurred. Please contact administrator.");
 		}
-		return "redirect:/admin/accounts/" + accountsModel.getClientsModel().getClientId();
+		return "redirect:/admin/client/details/" + accountsModel.getClientsModel().getClientId();
 	}
 
 }

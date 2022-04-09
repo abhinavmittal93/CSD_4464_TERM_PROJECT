@@ -53,17 +53,18 @@ public class TransactionController {
 			ClientsModel clientsModel = (ClientsModel) session.getAttribute("clientsModel");
 			List<AccountsModel> clientAccounts = accountsDao.getAccountByClientId(sessionClientId);
 			List<AccountsModel> accountsModelList = accountsDao.getAllAccounts();
+			List<AccountsModel> otherClientsAccounts = new ArrayList<AccountsModel>();
 			
 			// removing the accounts related to the logged in client
 			for(AccountsModel accountsModel : accountsModelList) {
-				if(accountsModel.getClientId() == clientsModel.getClientId()) {
-					accountsModel = null;
+				if(accountsModel.getClientId() != clientsModel.getClientId()) {
+					otherClientsAccounts.add(accountsModel);
 				}
 			}
 
 			m.addAttribute("clientsModel", clientsModel);
 			m.addAttribute("clientAccounts", clientAccounts);
-			m.addAttribute("accountsModelList", accountsModelList);
+			m.addAttribute("accountsModelList", otherClientsAccounts);
 		} catch (Exception e) {
 			System.err.println("Exception occurred in getTransactionPage(), " + e.getMessage() + e);
 			m.addAttribute("message", "An error occurred. Please contact Administrator");
@@ -234,7 +235,7 @@ public class TransactionController {
 					transferToAccountsModel.getBalance() + transactionModel.getBalance(), sqlDate);
 
 			// Deduct balance from the account from which transfer is made
-			accountsDao.updateAccountBalance(transferToAccountsModel.getAccountId(),
+			accountsDao.updateAccountBalance(transferFromAccountsModel.getAccountId(),
 					transferFromAccountsModel.getBalance() - transactionModel.getBalance(), sqlDate);
 
 			transactionsAuditModel.setStatus(Constants.TRANSACTION_STATUS_SUCCESS);

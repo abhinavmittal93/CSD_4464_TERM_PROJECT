@@ -23,6 +23,10 @@ public class UtilityBillsModel {
 
 	private Date paidOn;
 
+	private Long clientId;
+
+	private ClientsModel clientsModel;
+
 	/**
 	 * @return the utilityBillId
 	 */
@@ -105,6 +109,41 @@ public class UtilityBillsModel {
 	 */
 	public void setPaidOn(Date paidOn) {
 		this.paidOn = paidOn;
+	}
+
+	/**
+	 * @return the clientId
+	 */
+	public Long getClientId() {
+		return clientId;
+	}
+
+	/**
+	 * @param clientId the clientId to set
+	 */
+	public void setClientId(Long clientId) {
+		this.clientId = clientId;
+	}
+
+	/**
+	 * @return the clientsModel
+	 */
+	public ClientsModel getClientsModel() {
+		return clientsModel;
+	}
+
+	/**
+	 * @param clientsModel the clientsModel to set
+	 */
+	public void setClientsModel(ClientsModel clientsModel) {
+		this.clientsModel = clientsModel;
+	}
+
+	@Override
+	public String toString() {
+		return "UtilityBillsModel [utilityBillId=" + utilityBillId + ", utilitiesModel=" + utilitiesModel + ", balance="
+				+ balance + ", status=" + status + ", generatedOn=" + generatedOn + ", paidOn=" + paidOn + ", clientId="
+				+ clientId + ", clientsModel=" + clientsModel + "]";
 	}
 
 }

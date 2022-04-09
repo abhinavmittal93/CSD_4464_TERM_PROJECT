@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Add New Client</title>
+<%@include file="AdminMenu.jsp" %>
 <style type="text/css">
 	.middle {
       display: table;

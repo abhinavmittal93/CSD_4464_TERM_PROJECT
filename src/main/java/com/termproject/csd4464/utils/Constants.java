@@ -37,5 +37,10 @@ public class Constants {
 	public static final String TRANSACTION_ACTION_WITHDRAW = "WITHDRAW";
 	
 	public static final String TRANSACTION_ACTION_OTHER_TRANSFER = "DEPOSIT";
+	
+	
+	public static final String UTILITIES_BILLS_PAYMENT_STATUS_PENDING = "pending";
+	
+	public static final String UTILITIES_BILLS_PAYMENT_STATUS_PAID = "paid";
 
 }

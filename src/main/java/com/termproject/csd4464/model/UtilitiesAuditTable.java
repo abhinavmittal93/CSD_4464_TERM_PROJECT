@@ -23,6 +23,10 @@ public class UtilitiesAuditTable {
 
 	private String reasonCode;
 
+	private Long clientId;
+
+	private ClientsModel clientsModel;
+
 	/**
 	 * @return the utilityAuditId
 	 */
@@ -105,6 +109,41 @@ public class UtilitiesAuditTable {
 	 */
 	public void setReasonCode(String reasonCode) {
 		this.reasonCode = reasonCode;
+	}
+
+	/**
+	 * @return the clientId
+	 */
+	public Long getClientId() {
+		return clientId;
+	}
+
+	/**
+	 * @param clientId the clientId to set
+	 */
+	public void setClientId(Long clientId) {
+		this.clientId = clientId;
+	}
+
+	/**
+	 * @return the clientsModel
+	 */
+	public ClientsModel getClientsModel() {
+		return clientsModel;
+	}
+
+	/**
+	 * @param clientsModel the clientsModel to set
+	 */
+	public void setClientsModel(ClientsModel clientsModel) {
+		this.clientsModel = clientsModel;
+	}
+
+	@Override
+	public String toString() {
+		return "UtilitiesAuditTable [utilityAuditId=" + utilityAuditId + ", utilityBillsModel=" + utilityBillsModel
+				+ ", amount=" + amount + ", paidOn=" + paidOn + ", status=" + status + ", reasonCode=" + reasonCode
+				+ ", clientId=" + clientId + ", clientsModel=" + clientsModel + "]";
 	}
 
 }

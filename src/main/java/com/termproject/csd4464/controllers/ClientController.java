@@ -40,8 +40,11 @@ public class ClientController {
 		System.out.println("getClientLoginPage() begins");
 		HttpSession session = request.getSession(false);
 		
-		if (session != null) {
+		if (session != null && session.getAttribute("clientId") != null) {
 			return "redirect:/client/home";
+		}
+		if (session != null && session.getAttribute("clientId") == null) {
+			session.invalidate();
 		}
 		return "client/ClientLogin";
 	}
@@ -50,14 +53,7 @@ public class ClientController {
 	public String clientLogin(Model m, HttpServletRequest request, ClientsModel clientsModel) {
 		System.out.println("clientLogin() begins");
 
-		HttpSession session = request.getSession(false);
-		String sessionClientUserName = (String) session.getAttribute("clientUserName");
-
-		if (sessionClientUserName != null && !sessionClientUserName.isBlank()) {
-			return "redirect:/client/home";
-		}
-
-		session = request.getSession(true);
+		HttpSession session = request.getSession(true);
 
 		boolean isValidClient = clientDao.isValidClient(clientsModel.getUsername(), clientsModel.getPassword());
 		if (!isValidClient) {
@@ -89,6 +85,12 @@ public class ClientController {
 
 		try {
 			HttpSession session = request.getSession(false);
+			
+			if(session == null) {
+				m.addAttribute("message", "Please Login first!!!");
+				return "redirect:/client/login";
+			}
+			
 			String sessionClientUserName = (String) session.getAttribute("clientUserName");
 			if (sessionClientUserName == null || sessionClientUserName.isBlank()) {
 				m.addAttribute("message", "Please Login first!!!");

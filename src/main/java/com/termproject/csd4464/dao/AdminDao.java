@@ -4,6 +4,7 @@
 package com.termproject.csd4464.dao;
 
 import java.security.MessageDigest;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -22,7 +23,7 @@ public class AdminDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	private AdminUsersModel getAdminUserDetail(String username) {
+	public AdminUsersModel getAdminUserDetail(String username) {
 		String sql = "select * from admin_users where username=?";
 		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<AdminUsersModel>(AdminUsersModel.class),
 				new Object[] { username });
@@ -32,11 +33,12 @@ public class AdminDao {
 		try {
 			AdminUsersModel adminUsersModel = getAdminUserDetail(username);
 			if (adminUsersModel != null) {
-				byte[] bytesOfMessage = password.getBytes("UTF-8");
+				byte[] bytesOfPassword = password.getBytes();
 
 				MessageDigest md = MessageDigest.getInstance("MD5");
-				byte[] theMD5digest = md.digest(bytesOfMessage);
-				return adminUsersModel.getPassword().equals(theMD5digest.toString());
+				md.update(bytesOfPassword);
+			    byte[] digest = md.digest();
+				return adminUsersModel.getPassword().equals(Base64.getEncoder().encodeToString(digest));
 			}
 		} catch (Exception e) {
 			System.out.println("Exception occurred while validating admin user: " + e.getMessage() + e);

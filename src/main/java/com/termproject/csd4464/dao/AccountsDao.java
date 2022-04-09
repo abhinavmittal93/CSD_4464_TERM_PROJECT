@@ -84,6 +84,7 @@ public class AccountsDao {
 				AccountsModel accountsModel = new AccountsModel();
 				accountsModel.setAccountId(rs.getLong(1));
 				accountsModel.setAccountNo(rs.getString(2));
+				accountsModel.setClientId(rs.getLong(3));
 				accountsModel.setClientsModel(clientDao.getClientsDetailById(rs.getLong(3)));
 				accountsModel.setBankTypesModel(bankTypesDao.getBankTypeById(rs.getLong(4)));
 				accountsModel.setBalance(rs.getDouble(5));

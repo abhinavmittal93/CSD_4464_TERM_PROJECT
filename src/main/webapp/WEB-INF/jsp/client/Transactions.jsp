@@ -95,9 +95,9 @@
 				<tr>
 					<th>Transfer To</th>
 					<td>
-						<select name="transferToAccount">
+						<select name="transferToAccount" required>
 							<c:forEach items="${accountsModelList}" var="accountsModel">
-								<option value="${accountsModel.accountId}">${accountsModel.bankTypesModel.bankType} - ${accountsModel.accountNo}</option>
+								<option value="${accountsModel.accountId}">${accountsModel.clientsModel.firstName} ${accountsModel.clientsModel.lastName} - ${accountsModel.bankTypesModel.bankType} - ${accountsModel.accountNo}</option>
 							</c:forEach>
 						</select>
 					</td>
