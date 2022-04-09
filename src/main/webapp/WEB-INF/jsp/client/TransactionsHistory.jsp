@@ -40,7 +40,7 @@
 		<br>
 		<table class="center" style="width:100%">
 			<tr>
-				<th>Transferred From</th>
+				<th>Transactional Account</th>
 				<th>Transferred To</th>
 				<th>Amount</th>
 				<th>Status</th>
