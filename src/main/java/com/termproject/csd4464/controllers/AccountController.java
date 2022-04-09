@@ -60,7 +60,7 @@ public class AccountController {
 			m.addAttribute("clientsModel", clientsModel);
 			m.addAttribute("bankTypesModels", bankTypesModels);
 		} catch (Exception e) {
-			System.out.println("Exception occurred in createAccountPage(): " + e.getMessage() + e);
+			System.err.println("Exception occurred in createAccountPage(): " + e.getMessage() + e);
 			m.addAttribute("message", "An error occurred. Please contact administrator.");
 		}
 		return "admin/CreateAccount";
@@ -98,7 +98,7 @@ public class AccountController {
 			accountsDao.addAccount(accountsModel);
 			m.addAttribute("message", "Account created successfully.");
 		} catch (Exception e) {
-			System.out.println("Exception occurred in createAccount(): " + e.getMessage() + e);
+			System.err.println("Exception occurred in createAccount(): " + e.getMessage() + e);
 			m.addAttribute("message", "An error occurred. Please contact administrator.");
 		}
 		return "redirect:/admin/accounts/" + accountsModel.getClientsModel().getClientId();

@@ -16,14 +16,26 @@ public class Constants {
 	public static final String TRANSACTION_STATUS_PENDING = "pending";
 	
 	
-	public static final String TRANSACTION_REASON_CODE_DEPOSIT = "Deposit of funds successful";
+	public static final String TRANSACTION_REASON_CODE_DEPOSIT = "Deposit of funds successfull";
 	
-	public static final String TRANSACTION_REASON_CODE_TRANSFER = "Transfer of funds successful";
+	public static final String TRANSACTION_REASON_CODE_TRANSFER = "Transfer of funds successfull";
 	
-	public static final String TRANSACTION_REASON_CODE_WITHDRAWAL = "Withdrawal successful";
+	public static final String TRANSACTION_REASON_CODE_WITHDRAWAL = "Withdrawal successfull";
 	
-	public static final String TRANSACTION_REASON_CODE_PAYMENT = "Payment successful";
+	public static final String TRANSACTION_REASON_CODE_PAYMENT = "Payment successfull";
 	
 	public static final String TRANSACTION_REASON_CODE_INSUFF_FUNDS = "Insufficient funds";
+	
+	public static final String TRANSACTION_REASON_CODE_INVALID_INPUT = "Invalid Input by user";
+	
+	public static final String TRANSACTION_REASON_CODE_ERROR = "Unexpected Error";
+	
+	public static final String TRANSACTION_ACTION_DEPOSIT = "DEPOSIT";
+	
+	public static final String TRANSACTION_ACTION_SELF_TRANSFER = "SELF_TRANSFER";
+	
+	public static final String TRANSACTION_ACTION_WITHDRAW = "WITHDRAW";
+	
+	public static final String TRANSACTION_ACTION_OTHER_TRANSFER = "DEPOSIT";
 
 }

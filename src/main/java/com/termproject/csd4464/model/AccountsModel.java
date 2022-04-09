@@ -12,8 +12,12 @@ import java.sql.Date;
 public class AccountsModel {
 
 	private Long accountId;
-	
+
 	private String accountNo;
+
+	private Long clientId;
+
+	private Long bankTypeId;
 
 	private ClientsModel clientsModel;
 
@@ -24,6 +28,13 @@ public class AccountsModel {
 	private Date createdDate;
 
 	private Date updatedDate;
+
+	public AccountsModel() {
+	}
+
+	public AccountsModel(Long accountId) {
+		this.accountId = accountId;
+	}
 
 	/**
 	 * @return the accountId
@@ -38,8 +49,6 @@ public class AccountsModel {
 	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
 	}
-	
-	
 
 	/**
 	 * @return the accountNo
@@ -125,11 +134,39 @@ public class AccountsModel {
 		this.updatedDate = updatedDate;
 	}
 
+	/**
+	 * @return the clientId
+	 */
+	public Long getClientId() {
+		return clientId;
+	}
+
+	/**
+	 * @param clientId the clientId to set
+	 */
+	public void setClientId(Long clientId) {
+		this.clientId = clientId;
+	}
+
+	/**
+	 * @return the bankTypeId
+	 */
+	public Long getBankTypeId() {
+		return bankTypeId;
+	}
+
+	/**
+	 * @param bankTypeId the bankTypeId to set
+	 */
+	public void setBankTypeId(Long bankTypeId) {
+		this.bankTypeId = bankTypeId;
+	}
+
 	@Override
 	public String toString() {
-		return "AccountsModel [accountId=" + accountId + ", accountNo=" + accountNo + ", clientsModel=" + clientsModel
-				+ ", bankTypesModel=" + bankTypesModel + ", balance=" + balance + ", createdDate=" + createdDate
-				+ ", updatedDate=" + updatedDate + "]";
+		return "AccountsModel [accountId=" + accountId + ", accountNo=" + accountNo + ", clientId=" + clientId
+				+ ", bankTypeId=" + bankTypeId + ", clientsModel=" + clientsModel + ", bankTypesModel=" + bankTypesModel
+				+ ", balance=" + balance + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
 	}
 
 }

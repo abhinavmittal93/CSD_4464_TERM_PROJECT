@@ -15,7 +15,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import com.termproject.csd4464.model.BankTypesModel;
-import com.termproject.csd4464.model.ClientsModel;
 
 /**
  * @author abhinavmittal

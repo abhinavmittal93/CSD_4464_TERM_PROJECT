@@ -139,4 +139,12 @@ public class TransactionsAuditModel {
 		this.reasonCode = reasonCode;
 	}
 
+	@Override
+	public String toString() {
+		return "TransactionsAuditModel [transactionId=" + transactionId + ", transactionAccountModel="
+				+ transactionAccountModel + ", transferToAccountModel=" + transferToAccountModel + ", action=" + action
+				+ ", transactionDate=" + transactionDate + ", transactionAmount=" + transactionAmount + ", status="
+				+ status + ", reasonCode=" + reasonCode + "]";
+	}
+
 }

@@ -69,7 +69,7 @@ public class AdminController {
 				m.addAttribute("message", "Client is created successfully.");
 			}
 		} catch (Exception e) {
-			System.out.println("Exception occurred while adding a new client: " + e.getMessage() + e);
+			System.err.println("Exception occurred while adding a new client: " + e.getMessage() + e);
 			m.addAttribute("message", "An error occurred. Please contact administrator.");
 		}
 
@@ -91,7 +91,7 @@ public class AdminController {
 				m.addAttribute("message", "Client is updated successfully.");
 			}
 		} catch (Exception e) {
-			System.out.println("Exception occurred while updating a client: " + e.getMessage() + e);
+			System.err.println("Exception occurred while updating a client: " + e.getMessage() + e);
 			m.addAttribute("message", "An error occurred. Please contact administrator.");
 		}
 		return "redirect:/admin/clients";

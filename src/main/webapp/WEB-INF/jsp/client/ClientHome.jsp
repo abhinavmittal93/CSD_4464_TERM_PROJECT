@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Account Details</title>
+<title>Client Details</title>
+<%@include file="Menu.jsp" %>
 <style type="text/css">
 	.middle {
       display: table;
@@ -26,7 +27,15 @@
 </head>
 <body align="center">
 	<div style="text-align: center;">
-		<h1>Account Details</h1>
+		<h1>Client Details</h1>
+		<c:choose>
+			<c:when test="${param.status eq 'success'}">
+				<span style="color:green;"><c:out value="${param.message}"/></span>
+			</c:when>
+			<c:otherwise>
+				<span style="color:red;"><c:out value="${param.message}"/></span>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<div class="rounded">
 		<table class="center" style="width:100%">
