@@ -40,7 +40,7 @@ public class Constants {
 
 	public static final String TRANSACTION_ACTION_WITHDRAW = "WITHDRAW";
 
-	public static final String TRANSACTION_ACTION_OTHER_TRANSFER = "DEPOSIT";
+	public static final String TRANSACTION_ACTION_OTHER_TRANSFER = "OTHER_ACCOUNT";
 
 	public static final String TRANSACTION_ACTION_UTILITY_BILL_PAYMENT = "UTILITY_BILL_PAYMENT";
 

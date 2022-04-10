@@ -434,7 +434,7 @@ public class TransactionController {
 				return "client/ClientLogin";
 			}
 
-			transactionsAuditModel.setAction(Constants.TRANSACTION_ACTION_DEPOSIT);
+			transactionsAuditModel.setAction(Constants.TRANSACTION_ACTION_WITHDRAW);
 			transactionsAuditModel.setTransactionAmount(transactionModel.getBalance());
 
 			java.util.Date date = new java.util.Date();
