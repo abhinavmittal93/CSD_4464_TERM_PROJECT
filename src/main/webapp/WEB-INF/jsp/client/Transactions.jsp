@@ -149,7 +149,7 @@
 		<form:form action="${pageContext.request.contextPath}/transaction/withdraw" method="POST">
 			<table class="center" style="width:100%">
 				<tr>
-					<th>Deposit To</th>
+					<th>Withdraw From</th>
 					<td>
 						<select name="transferFromAccountId">
 							<c:forEach items="${clientAccounts}" var="clientAccount">
