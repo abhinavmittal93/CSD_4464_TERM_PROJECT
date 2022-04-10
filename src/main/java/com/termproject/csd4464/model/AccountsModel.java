@@ -7,6 +7,9 @@ import java.sql.Date;
 
 /**
  * @author abhinavmittal
+ * 
+ *  Model class for table "accounts" with accountId, accountNo, clientId, bankTypeId,
+ *  clientsModel, bankTypesModel, balance, createdDate, updatedDate.
  *
  */
 public class AccountsModel {

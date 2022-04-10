@@ -5,6 +5,8 @@ package com.termproject.csd4464.model;
 
 /**
  * @author abhinavmittal
+ * 
+ * Model class for table "utilities" with utilityId, utilityType, utilityName.
  *
  */
 public class UtilitiesModel {

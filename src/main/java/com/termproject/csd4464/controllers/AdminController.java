@@ -27,6 +27,11 @@ import com.termproject.csd4464.model.UtilityBillsModel;
 
 /**
  * @author abhinavmittal
+ * 
+ * This Controller handles the requests related to admin's tasks such as Login/Logout,
+ * creating or updating a client
+ * 
+ * And this is only accessible to admin users.
  *
  */
 @RequestMapping("/admin")
@@ -45,6 +50,18 @@ public class AdminController {
 	@Autowired
 	private UtilityBillsDao utilityBillsDao;
 	
+	
+	/**
+	 * 
+	 * It displays a form to login for the admin users.
+	 * 
+	 * It first checks if the user is already logged in, and if the user is already logged in
+	 * then takes the user to Clients' Details page.
+	 * 
+	 * @param m
+	 * @param request
+	 * @return AdminLogin.jsp
+	 */
 	@GetMapping("/login")
 	public String getAdminLoginPage(Model m, HttpServletRequest request) {
 		System.out.println("getAdminLoginPage() begins");
@@ -61,6 +78,19 @@ public class AdminController {
 		return "admin/AdminLogin";
 	}
 
+	/**
+	 * 
+	 * It receives the request to log in the admin user, 
+	 * and gets the credentials in AdminUsersModel attribute
+	 * 
+	 * And if the credentials are correct then, a session is created,
+	 * and will be redirected to the Clients' Details page.
+	 * 
+	 * @param m
+	 * @param request
+	 * @param adminUsersModel
+	 * @return Redirects to the Clients' Details Page
+	 */
 	@PostMapping("/login")
 	public String adminLogin(Model m, HttpServletRequest request, AdminUsersModel adminUsersModel) {
 		System.out.println("adminLogin() begins");
@@ -82,6 +112,12 @@ public class AdminController {
 		return "redirect:/admin/clients";
 	}
 	
+	/**
+	 * It is used to log out the admin user and delete the session.
+	 * 
+	 * @param request
+	 * @return Admin Login Page
+	 */
 	@GetMapping("/logout")
 	public String adminLogout(HttpServletRequest request) {
 		System.out.println("adminLogout() begins");
@@ -91,6 +127,14 @@ public class AdminController {
 	}
 	
 	
+	/**
+	 * It displays all the clients in the database.
+	 * Here "clientsModels" is a reserved request attribute which is used to display clients' data in the table
+	 * 
+	 * @param m
+	 * @param request
+	 * @return Clients.jsp
+	 */
 	@GetMapping("/clients")
 	private String getAllClients(Model m, HttpServletRequest request) {
 		System.out.println("addClient:Get begins");
@@ -113,6 +157,14 @@ public class AdminController {
 	}
 	
 
+	/**
+	 * 
+	 * It displays a form to input data to create a new client.
+	 * 
+	 * @param m
+	 * @param request
+	 * @return AddClient.jsp
+	 */
 	@GetMapping("/addClient")
 	private String addClient(Model m, HttpServletRequest request) {
 		System.out.println("addClient:Get begins");
@@ -132,6 +184,16 @@ public class AdminController {
 		return "admin/AddClient";
 	}
 
+	/**
+	 * 
+	 * It displays a form to input data to update a client.
+	 * 
+	 * Here "clientsModels" is a reserved request attribute which is used to display clients' data in the dropdown
+	 * 
+	 * @param m
+	 * @param request
+	 * @return UpdateClient.jsp
+	 */
 	@GetMapping("/updateClient")
 	private String updateClient(Model m, HttpServletRequest request) {
 		System.out.println("updateClient:Get begins");
@@ -153,6 +215,16 @@ public class AdminController {
 		return "admin/UpdateClient";
 	}
 
+	/**
+	 * 
+	 * It saves object in database. The "ClientsModel" object receives the entered information
+	 * and then it is stored in the database.
+	 * 
+	 * @param m
+	 * @param request
+	 * @param clientsModel
+	 * @return Redirects to the Clients' Details Page
+	 */
 	@PostMapping("/addClient")
 	private String addClient(Model m, HttpServletRequest request, ClientsModel clientsModel) {
 		System.out.println("addClient:Post begins, clientsModel: " + clientsModel.toString());
@@ -176,6 +248,16 @@ public class AdminController {
 		return "redirect:/admin/clients";
 	}
 
+	/**
+	 * It updates object in database. The "ClientsModel" object receives the entered information
+	 * and then it is stored in the database.
+	 * 
+	 * 
+	 * @param m
+	 * @param request
+	 * @param clientsModel
+	 * @return Redirects to the Clients' Details Page
+	 */
 	@PostMapping("/updateClient")
 	private String updateClient(Model m, HttpServletRequest request, ClientsModel clientsModel) {
 		System.out.println("updateClient:Post begins, clientsModel: " + clientsModel.toString());
@@ -197,6 +279,25 @@ public class AdminController {
 		return "redirect:/admin/clients";
 	}
 	
+	
+	/**
+	 * 
+	 * It gets the Client Details page where all the information related to the client is displayed,
+	 * such as, all the accounts and utility bills.
+	 * 
+	 * It takes in a path variable named "clientId", for which the all the information has to be displayed.
+	 * 
+	 * Here "clientsModels" is a reserved request attribute which is used to display client's data.
+	 * 
+	 * Here "accountsModels" is a reserved request attribute which is used to display clients' accounts data.
+	 * 
+	 * Here "utilityBillsModels" is a reserved request attribute which is used to display clients' utility bills data.
+	 * 
+	 * @param m
+	 * @param request
+	 * @param clientId
+	 * @return ClientDetails.jsp
+	 */
 	@GetMapping("/client/details/{clientId}")
 	public String getClientDetailsPage(Model m, HttpServletRequest request, @PathVariable Long clientId) {
 		System.out.println("getAccountsPageForClient(): begins, clientId: " + clientId);

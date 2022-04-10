@@ -18,6 +18,9 @@ import com.termproject.csd4464.model.BankTypesModel;
 
 /**
  * @author abhinavmittal
+ * 
+ * This is a DAO class which handles the Database queries related to "bank_types" table 
+ * and transform the retrieved data and return to Controller.
  *
  */
 @Service
@@ -26,6 +29,14 @@ public class BankTypesDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	/**
+	 * 
+	 * It retrieves all the records from bank_types table 
+	 * and set it in the Model 
+	 * and return the List. 
+	 * 
+	 * @return List<BankTypesModel>
+	 */
 	public List<BankTypesModel> getBankTypes() {
 		System.out.println("getBankTypes(): begins:");
 		return jdbcTemplate.query("select * from bank_types", new RowMapper<BankTypesModel>() {
@@ -38,6 +49,13 @@ public class BankTypesDao {
 		});
 	}
 	
+	/**
+	 * 
+	 * It retrieves the details of an bankType user by bankTypeId.
+	 * 
+	 * @param bankTypeId
+	 * @return BankTypesModel
+	 */
 	public BankTypesModel getBankTypeById(Long bankTypeId) {
 		System.out.println("getBankTypeById(): begins:, bankTypeId: " + bankTypeId);
 		String sql = "select * from bank_types where bank_type_id=?";

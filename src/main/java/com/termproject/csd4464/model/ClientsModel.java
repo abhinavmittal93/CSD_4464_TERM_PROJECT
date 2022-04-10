@@ -8,6 +8,9 @@ import java.util.Base64;
 
 /**
  * @author abhinavmittal
+ * 
+ * Model class for table "clients" with clientId, firstName, lastName, gender,
+ *  email, phone, username, password.
  *
  */
 public class ClientsModel {

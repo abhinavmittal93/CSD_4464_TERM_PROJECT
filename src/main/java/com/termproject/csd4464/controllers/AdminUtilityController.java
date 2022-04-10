@@ -27,6 +27,9 @@ import com.termproject.csd4464.utils.Constants;
 
 /**
  * @author abhinavmittal
+ * 
+ * This controller handles the requests related to the Utility Bills for a client,
+ * such as, creating a new utility bill.
  *
  */
 
@@ -43,6 +46,22 @@ public class AdminUtilityController {
 	@Autowired
 	private ClientDao clientDao;
 
+	/**
+	 * 
+	 * It displays a form to input data for creating a new utility bill for a client.
+	 * 
+	 * It takes in a path variable named "clientId", for which the bill has to be created.
+	 * 
+	 * It first checks if the user is logged in and if the user is admin.
+	 * 
+	 * Here we are passing client's details in "clientsModel", and
+	 * different types of utilities in "utilitiesModels"
+	 * 
+	 * @param m
+	 * @param request
+	 * @param clientId
+	 * @return CreateUtilityBills.jsp
+	 */
 	@GetMapping("/bills/create/{clientId}")
 	public String getCreateUtilitiesBillPage(Model m, HttpServletRequest request, @PathVariable Long clientId) {
 		System.out.println("getCreateUtilitiesBillPage() begins: clientId: " + clientId);
@@ -68,6 +87,18 @@ public class AdminUtilityController {
 		return "admin/CreateUtilityBills";
 	}
 
+	/**
+	 * 
+	 * It saves the object in the database.
+	 * The "UtilityBillsModel" will receive the inputs entered by the user.
+	 * 
+	 * Here we have added validation, if the bill amount is greater than zero.
+	 * 
+	 * @param m
+	 * @param request
+	 * @param utilityBillsModel
+	 * @return Redirects to the Clients' Details Page
+	 */
 	@PostMapping("/bills/create")
 	public String createUtilitiesBillForAClient(Model m, HttpServletRequest request,
 			UtilityBillsModel utilityBillsModel) {

@@ -5,6 +5,9 @@ package com.termproject.csd4464.model;
 
 /**
  * @author abhinavmittal
+ * 
+ * Model class just for passing data from form to controller, 
+ * with fields transferFromAccountId, transferToAccount, balance, action.
  *
  */
 public class TransactionModel {

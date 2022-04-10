@@ -15,6 +15,9 @@ import com.termproject.csd4464.model.AdminUsersModel;
 
 /**
  * @author abhinavmittal
+ * 
+ * This is a DAO class which handles the Database queries related to "admin_users" table 
+ * and transform the retrieved data and return to AdminController.
  *
  */
 @Service
@@ -23,12 +26,27 @@ public class AdminDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	/**
+	 * 
+	 * It retrieves the details of an admin user by username.
+	 * 
+	 * @param username
+	 * @return AdminUsersModel
+	 */
 	public AdminUsersModel getAdminUserDetail(String username) {
 		String sql = "select * from admin_users where username=?";
 		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<AdminUsersModel>(AdminUsersModel.class),
 				new Object[] { username });
 	}
 
+	/**
+	 * 
+	 * It validates the admin user by comparing the password in the database and the password entered by the user.
+	 * 
+	 * @param username
+	 * @param password
+	 * @return True/False
+	 */
 	public boolean isValidAdminUser(String username, String password) {
 		try {
 			AdminUsersModel adminUsersModel = getAdminUserDetail(username);

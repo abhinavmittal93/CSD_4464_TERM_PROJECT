@@ -7,6 +7,9 @@ import java.sql.Date;
 
 /**
  * @author abhinavmittal
+ * 
+ * Model class for table "transaction_audit" with transactionId, transactionAccountModel, transferToAccountModel, 
+ * action, transactionDate, transactionAmount, status, reasonCode.
  *
  */
 public class TransactionsAuditModel {

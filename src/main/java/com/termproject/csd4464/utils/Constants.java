@@ -5,6 +5,9 @@ package com.termproject.csd4464.utils;
 
 /**
  * @author abhinavmittal
+ * 
+ * This is a class which has all the constants used in the application,
+ * related to statuses of the transactions, action and reason code of the result of a transaction.
  *
  */
 public class Constants {

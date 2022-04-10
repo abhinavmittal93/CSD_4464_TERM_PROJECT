@@ -21,6 +21,9 @@ import com.termproject.csd4464.model.ClientsModel;
 
 /**
  * @author abhinavmittal
+ * 
+ * This is a DAO class which handles the Database queries related to "accounts" table 
+ * and transform the retrieved data and return to AccountsController.
  *
  */
 @Service
@@ -35,6 +38,13 @@ public class AccountsDao {
 	@Autowired
 	private ClientDao clientDao;
 
+	/**
+	 * 
+	 * It adds a new record in accounts table with the details provided by the user.
+	 * 
+	 * @param accountsModel
+	 * @return the number of rows affected
+	 */
 	public int addAccount(AccountsModel accountsModel) {
 		System.out.println("addAccount() begins, accountsModel: " + accountsModel.toString());
 		String sql = "INSERT INTO accounts (account_no, client_id, bank_type_id, balance, created_date, updated_date) "
@@ -46,6 +56,17 @@ public class AccountsDao {
 		return jdbcTemplate.update(sql);
 	}
 
+	/**
+	 * 
+	 * It retrieves all the records from accounts table for a client by clientId 
+	 * and set it in the Model 
+	 * and return the List. 
+	 * 
+	 * Also, it retrieves the foreign key table details as well.
+	 * 
+	 * @param clientId
+	 * @return List<AccountsModel>
+	 */
 	public List<AccountsModel> getAccountByClientId(long clientId) {
 		System.out.println("getAccountByClientId() begins, client_id: " + clientId);
 		return jdbcTemplate.query("select * from accounts where client_id = " + clientId,
@@ -64,6 +85,17 @@ public class AccountsDao {
 				});
 	}
 
+	/**
+	 * 
+	 * It retrieves an account details from accounts table for a client by clientId and bankTypeId
+	 * and set it in the Model. 
+	 * 
+	 * Also, it retrieves the foreign key table details as well.
+	 * 
+	 * @param clientId
+	 * @param bankTypeId
+	 * @return AccountsModel
+	 */
 	public AccountsModel getAccountByClientIdAndBankTypeId(long clientId, long bankTypeId) {
 		System.out.println(
 				"getAccountByClientIdAndBankTypeId() begins, client_id: " + clientId + ", bankTypeId: " + bankTypeId);
@@ -77,6 +109,16 @@ public class AccountsDao {
 		}
 	}
 
+	/**
+	 * 
+	 * It retrieves all the records from accounts table of all client 
+	 * and set it in the Model 
+	 * and return the List. 
+	 * 
+	 * Also, it retrieves the foreign key table details as well.
+	 * 
+	 * @return List<AccountsModel>
+	 */
 	public List<AccountsModel> getAllAccounts() {
 		System.out.println("getAllAccounts() begins");
 		return jdbcTemplate.query("select * from accounts", new RowMapper<AccountsModel>() {
@@ -95,6 +137,16 @@ public class AccountsDao {
 		});
 	}
 
+	/**
+	 * 
+	 * It retrieves an account details from accounts table by accountId
+	 * and set it in the Model. 
+	 * 
+	 * Also, it retrieves the foreign key table details as well.
+	 * 
+	 * @param accountId
+	 * @return AccountsModel
+	 */
 	public AccountsModel getAccountByAccountId(Long accountId) {
 		System.out.println("getAccountByAccountId() begins, accountId: " + accountId);
 		
@@ -121,6 +173,15 @@ public class AccountsDao {
 		}
 	}
 	
+	/**
+	 * 
+	 * It updates the account balance details by accountId with the provided details.
+	 * 
+	 * @param accountId
+	 * @param balance
+	 * @param updateDate
+	 * @return the number of rows affected
+	 */
 	public int updateAccountBalance(long accountId, double balance, Date updateDate) {
 		System.out.println("updateAccountBalance() begins, accountId: " + accountId + ", balance: " + balance);
 		String sql = "UPDATE accounts SET balance = " + balance + ", updated_date = '" + updateDate + "' where account_id = " + accountId;

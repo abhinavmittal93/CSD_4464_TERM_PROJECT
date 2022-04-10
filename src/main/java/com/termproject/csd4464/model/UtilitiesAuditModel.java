@@ -7,6 +7,9 @@ import java.sql.Date;
 
 /**
  * @author abhinavmittal
+ * 
+ * Model class for table "utilities_audit" with utilityAuditId, utilityBillsModel, amount, paidOn,
+ *  status, reasonCode, clientId, clientsModel.
  *
  */
 public class UtilitiesAuditModel {

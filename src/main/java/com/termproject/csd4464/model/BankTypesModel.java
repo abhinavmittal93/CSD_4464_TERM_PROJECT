@@ -5,6 +5,8 @@ package com.termproject.csd4464.model;
 
 /**
  * @author abhinavmittal
+ * 
+ * Model class for table "bank_types" with bankTypeId, bankType.
  *
  */
 public class BankTypesModel {

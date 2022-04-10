@@ -8,6 +8,8 @@ import java.util.Base64;
 
 /**
  * @author abhinavmittal
+ * 
+ * Model class for table "admin_users" with adminId, username, password.
  *
  */
 public class AdminUsersModel {

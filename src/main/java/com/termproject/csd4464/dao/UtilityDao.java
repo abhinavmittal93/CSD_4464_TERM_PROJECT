@@ -18,6 +18,9 @@ import com.termproject.csd4464.model.UtilitiesModel;
 
 /**
  * @author abhinavmittal
+ * 
+ * This is a DAO class which handles the Database queries related to "utilities" table 
+ * and transform the retrieved data and return to Controller.
  *
  */
 @Service
@@ -26,6 +29,14 @@ public class UtilityDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	/**
+	 * 
+	 * It retrieves all the records from utilities table 
+	 * and set it in the Model 
+	 * and return the List. 
+	 * 
+	 * @return List<UtilitiesModel>
+	 */
 	public List<UtilitiesModel> getUtilities() {
 		System.out.println("getUtilities(): begins:");
 		return jdbcTemplate.query("select * from utilities", new RowMapper<UtilitiesModel>() {
@@ -39,6 +50,12 @@ public class UtilityDao {
 		});
 	}
 
+	/**
+	 * It retrieves the details of an utility user by utilityId.
+	 * 
+	 * @param utilityId
+	 * @return UtilitiesModel
+	 */
 	public UtilitiesModel getUtilityById(Long utilityId) {
 		System.out.println("getUtilityById(): begins:, utilityId: " + utilityId);
 		String sql = "select * from utilities where utility_id=?";

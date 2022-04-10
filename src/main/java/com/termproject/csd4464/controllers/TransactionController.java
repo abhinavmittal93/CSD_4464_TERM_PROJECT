@@ -26,6 +26,11 @@ import com.termproject.csd4464.utils.Constants;
 
 /**
  * @author abhinavmittal
+ * 
+ * This controller handles all the requests related to the transactions,
+ * such as Self Transfer, Transfer to other client, Deposit Money, Withdrawing money.
+ * 
+ * And this is accessible only to clients.
  *
  */
 
@@ -39,6 +44,22 @@ public class TransactionController {
 	@Autowired
 	private TransactionAuditDao transactionAuditDao;
 
+	
+	/**
+	 * 
+	 * It displays multiple forms for the transactions such as: Self Transfer, Transfer to other client, Deposit Money, Withdrawing money.
+	 * 
+	 * Here "clientsModels" is a reserved request attribute which is used to display client's data.
+	 *
+	 * Here "clientAccounts" is a reserved request attribute which is used to display client's accounts.
+	 * 
+	 * Here "accountsModelList" is a reserved request attribute which is used to display other client's accounts,
+	 * the logged in client's accounts is removed from this list.
+	 * 
+	 * @param m
+	 * @param request
+	 * @return Transactions.jsp
+	 */
 	@RequestMapping("")
 	public String getTransactionPage(Model m, HttpServletRequest request) {
 		System.out.println("getTransactionPage(): begins");
@@ -73,6 +94,18 @@ public class TransactionController {
 		return "client/Transactions";
 	}
 
+	/**
+	 * 
+	 * It displays all the transactions made by the logged in client or for the logged in client.
+	 * 
+	 * Here "clientsModels" is a reserved request attribute which is used to display client's data.
+	 * 
+	 * Here "transactionsAuditModels" is a reserved request attribute which is used to display client's transaction history.
+	 * 
+	 * @param m
+	 * @param request
+	 * @return TransactionsHistory.jsp
+	 */
 	@RequestMapping("/history")
 	public String getTransactionHistoryPage(Model m, HttpServletRequest request) {
 		System.out.println("getTransactionHistoryPage(): begins");
@@ -106,6 +139,26 @@ public class TransactionController {
 		return "client/TransactionsHistory";
 	}
 
+	/**
+	 * 
+	 * It stores the object in the database.
+	 * 
+	 * It transfers the money to the same client's another account.
+	 * 
+	 * The parameter "TransactionModel" receives all the information entered by the user.
+	 * 
+	 * It has all the validation such as:
+	 * i) the amount being transferred is greater than zero or not.
+	 * ii) the account has sufficient funds or not
+	 * iii) the account in which the money is being transferred is not the same account from which the transfer is being made.
+	 * 
+	 * It also inserts a transaction history.
+	 * 
+	 * @param m
+	 * @param request
+	 * @param transactionModel
+	 * @return Redirects to transaction history.
+	 */
 	@PostMapping("/self")
 	public String selfTransfer(Model m, HttpServletRequest request, TransactionModel transactionModel) {
 		System.out.println("selfTransfer(): begins, " + transactionModel.toString());
@@ -185,6 +238,27 @@ public class TransactionController {
 		return "redirect:/transaction/history";
 	}
 
+	/**
+	 * 
+	 * It stores the object in the database.
+	 * 
+	 * It transfers the money to other client's account.
+	 * 
+	 * It deducts the money from the logged in client's account and add to the other client's account.
+	 * 
+	 * The parameter "TransactionModel" receives all the information entered by the user.
+	 * 
+	 * It has all the validation such as:
+	 * i) the amount being transferred is greater than zero or not.
+	 * ii) the account has sufficient funds or not.
+	 * 
+	 * It also inserts a transaction history.
+	 * 
+	 * @param m
+	 * @param request
+	 * @param transactionModel
+	 * @return Redirects to transaction history.
+	 */
 	@PostMapping("/other")
 	public String otherAccountTransfer(Model m, HttpServletRequest request, TransactionModel transactionModel) {
 		System.out.println("otherAccountTransfer(): begins, " + transactionModel.toString());
@@ -256,6 +330,24 @@ public class TransactionController {
 		return "redirect:/transaction/history";
 	}
 	
+	/**
+	 * 
+	 * It stores the object in the database.
+	 * 
+	 * It deposits the money in the logged in client's selected account.
+	 * 
+	 * The parameter "TransactionModel" receives all the information entered by the user.
+	 * 
+	 * It has the validation such as:
+	 * i) the amount being transferred is greater than zero or not.
+	 * 
+	 * It also inserts a transaction history.
+	 * 
+	 * @param m
+	 * @param request
+	 * @param transactionModel
+	 * @return Redirects to transaction history.
+	 */
 	@PostMapping("/deposit")
 	public String depositMoney(Model m, HttpServletRequest request, TransactionModel transactionModel) {
 		System.out.println("depositMoney(): begins, " + transactionModel.toString());
@@ -311,6 +403,25 @@ public class TransactionController {
 		return "redirect:/transaction/history";
 	}
 	
+	/**
+	 * 
+	 * It stores the object in the database.
+	 * 
+	 * It withdraws the money from the logged in client's selected account.
+	 * 
+	 * The parameter "TransactionModel" receives all the information entered by the user.
+	 * 
+	 * It has the validation such as:
+	 * i) the amount being withdrawn is greater than zero or not.
+	 * ii) the account has sufficient funds or not.
+	 * 
+	 * It also inserts a transaction history.
+	 * 
+	 * @param m
+	 * @param request
+	 * @param transactionModel
+	 * @return Redirects to transaction history.
+	 */
 	@PostMapping("/withdraw")
 	public String withdrawMoney(Model m, HttpServletRequest request, TransactionModel transactionModel) {
 		System.out.println("withdrawMoney(): begins, " + transactionModel.toString());

@@ -33,6 +33,12 @@ import com.termproject.csd4464.utils.Constants;
 
 /**
  * @author abhinavmittal
+ * 
+ * This controller handles all the requests related to the Utility Bills of a client,
+ * such as displaying all the bills, paying a bill
+ * and displaying the history of bills.
+ * 
+ * And this is accessible only to clients.
  *
  */
 
@@ -58,6 +64,24 @@ public class ClientUtilityController {
 	@Autowired
 	private UtilityAuditDao utilityAuditDao;
 
+	/**
+	 * 
+	 * It displays a form to input the data to pay a bill.
+	 * 
+	 * It displays the bills for the logged in client.
+	 * 
+	 * It gets the clientId from the session and get all data on basis of that.
+	 * 
+	 * Here "clientsModels" is a reserved request attribute which is used to display client's data.
+	 * 
+	 * Here "utilityBillsModels" is a reserved request attribute which is used to display client's utility bills data.
+	 * 
+	 * Here "clientAccounts" is a reserved request attribute which is used to display client's accounts.
+	 * 
+	 * @param m
+	 * @param request
+	 * @return PayBills.jsp
+	 */
 	@GetMapping("/bills")
 	public String getClientBills(Model m, HttpServletRequest request) {
 		System.out.println("getClientBills() begins:");
@@ -86,6 +110,28 @@ public class ClientUtilityController {
 		return "client/PayBills";
 	}
 
+	/**
+	 * 
+	 * It saves and updates the objects in the database.
+	 * 
+	 * The "UtilityBillsModel" object receives the entered information
+	 * and then it is updated in the database.
+	 * 
+	 * The "TransactionModel" receives the information related the account,
+	 * through which the bill has to be paid.
+	 * 
+	 * It has validations, such as the accounts has sufficient funds or not.
+	 * 
+	 * It updates the status of bill to paid.
+	 * It inserts a transaction history for the related account.
+	 * Also, it inserts a record in utilities_audit table, which has all the paid bills hidtory. 
+	 * 
+	 * @param m
+	 * @param request
+	 * @param utilityBillsModel
+	 * @param transactionModel
+	 * @return Redirects to the Bill History page
+	 */
 	@PostMapping("/bills/pay")
 	public String payUtilityBillsForAclient(Model m, HttpServletRequest request, UtilityBillsModel utilityBillsModel,
 			TransactionModel transactionModel) {
@@ -113,15 +159,6 @@ public class ClientUtilityController {
 			java.util.Date date = new java.util.Date();
 			java.sql.Date sqlDate = new Date(date.getTime());
 			transactionsAuditModel.setTransactionDate(sqlDate);
-
-			// check if the amount of bill is greater than zero or not
-			if (utilityBillsModel.getBalance() <= 0) {
-				System.err.println("Bill Amount is zero or less than zero.");
-				m.addAttribute("message", "Amount should be greater than zero.");
-				transactionsAuditModel.setStatus(Constants.TRANSACTION_STATUS_FAILED);
-				transactionsAuditModel.setReasonCode(Constants.TRANSACTION_REASON_CODE_INVALID_INPUT);
-				return "redirect:/transaction/history";
-			}
 
 			// get the details of the account which is being used to pay the bill
 			AccountsModel accountsModel = accountsDao
@@ -174,6 +211,17 @@ public class ClientUtilityController {
 		return "redirect:/client/utilities/bills/history";
 	}
 
+	/**
+	 * 
+	 * It displays all the history of paid bills for the logged in client.
+	 * 
+	 * Here "utilitiesAuditModels" is a reserved request attribute,
+	 * which is used to display client's paid bill history in the table
+	 * 
+	 * @param m
+	 * @param request
+	 * @return UtilityBillsHistory.jsp
+	 */
 	@GetMapping("/bills/history")
 	public String getPaidBillsHistory(Model m, HttpServletRequest request) {
 		System.out.println("getPaidBillsHistory() begins:");

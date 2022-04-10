@@ -16,6 +16,9 @@ import com.termproject.csd4464.model.TransactionsAuditModel;
 
 /**
  * @author abhinavmittal
+ * 
+ * This is a DAO class which handles the Database queries related to "transaction_audit" table 
+ * and transform the retrieved data and return to TransactionController.
  *
  */
 @Service
@@ -27,6 +30,12 @@ public class TransactionAuditDao {
 	@Autowired
 	private AccountsDao accountsDao;
 
+	/**
+	 * It adds a new record in transaction_audit table whenever a transaction is made.
+	 * 
+	 * @param transactionsAuditModel
+	 * @return the number of rows affected
+	 */
 	public int insertTransactionHistory(TransactionsAuditModel transactionsAuditModel) {
 		System.out.println("insertTransactionHistory() begins:, " + transactionsAuditModel.toString());
 		
@@ -46,6 +55,17 @@ public class TransactionAuditDao {
 		return 0;
 	}
 
+	/**
+	 * 
+	 * It retrieves all the records from transaction_audit table by accountIds
+	 * and set it in the Model 
+	 * and return the List. 
+	 * 
+	 * Also, it retrieves the foreign key table details as well.
+	 * 
+	 * @param accountIds
+	 * @return List<TransactionsAuditModel>
+	 */
 	public List<TransactionsAuditModel> getAllTransactionsByAccountId(List<Long> accountIds) {
 		System.out.println("getAllTransactionsByAccountId() begins, accountId:" + accountIds);
 		String accountIdsCommaSeparated = accountIds.toString();

@@ -16,6 +16,9 @@ import com.termproject.csd4464.model.UtilitiesAuditModel;
 
 /**
  * @author abhinavmittal
+ * 
+ * This is a DAO class which handles the Database queries related to "utilities_audit" table 
+ * and transform the retrieved data and return to ClientUtilityController.
  *
  */
 @Service
@@ -27,6 +30,13 @@ public class UtilityAuditDao {
 	@Autowired
 	private UtilityBillsDao utilityBillsDao;
 
+	/**
+	 * 
+	 * It adds a new record in utilities_audit table whenever a bill is paid.
+	 * 
+	 * @param utilitiesAuditModel
+	 * @return the number of rows affected
+	 */
 	public int insertUtilityAuditHistory(UtilitiesAuditModel utilitiesAuditModel) {
 		System.out
 				.println("insertUtilityAuditHistory() begins:, utilitiesAuditModel: " + utilitiesAuditModel.toString());
@@ -44,6 +54,16 @@ public class UtilityAuditDao {
 		return 0;
 	}
 
+	/**
+	 * It retrieves all the records from utilities_audit table by clientId
+	 * and set it in the Model 
+	 * and return the List. 
+	 * 
+	 * Also, it retrieves the foreign key table details as well.
+	 * 
+	 * @param clientId
+	 * @return List<UtilitiesAuditModel>
+	 */
 	public List<UtilitiesAuditModel> getUtilityBillsHistoryByClient(long clientId) {
 		System.out.println("getUtilityBillsHistoryByClient() begins, clientId:" + clientId);
 		return jdbcTemplate.query("select * from utilities_audit where client_id = " + clientId,

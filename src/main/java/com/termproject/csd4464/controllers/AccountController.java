@@ -26,6 +26,11 @@ import com.termproject.csd4464.model.ClientsModel;
 
 /**
  * @author abhinavmittal
+ * 
+ * This controller handles the request related to the accounts of a client,
+ * such as creating a new account.
+ * 
+ * And this is only accessible to admin users.
  *
  */
 @Controller
@@ -41,6 +46,21 @@ public class AccountController {
 	@Autowired
 	private AccountsDao accountsDao;
 
+	/**
+	 * 
+	 * It displays a form to input data for creating a new account.
+	 * 
+	 * It takes in a path variable named "clientId", for which the account has to be created.
+	 * It first checks if the user is logged in and if the user is admin.
+	 * 
+	 * Here we are passing client's details in "clientsModel", and
+	 * different types of accounts in "bankTypesModels"
+	 * 
+	 * @param m
+	 * @param request
+	 * @param clientId
+	 * @return CreateAccount.jsp
+	 */
 	@GetMapping("/create/{clientId}")
 	private String createAccountPage(Model m, HttpServletRequest request, @PathVariable Long clientId) {
 		System.out.println("createAccount:Get begins, clientId: " + clientId);
@@ -70,6 +90,19 @@ public class AccountController {
 		return "admin/CreateAccount";
 	}
 
+	/**
+	 * 
+	 * It saves the object in the database. The "AccountsModel" will receive the inputs entered by the user.
+	 * 
+	 * Here we have added validations, if the client has already an account with same account type,
+	 * 
+	 * And we are generating a unique Account Number as well for the new account.
+	 * 
+	 * @param m
+	 * @param request
+	 * @param accountsModel
+	 * @return Redirects to the Clients' Details Page
+	 */
 	@PostMapping("/create")
 	private String createAccount(Model m, HttpServletRequest request, AccountsModel accountsModel) {
 		System.out.println("createAccount:Post begins, accountsModel: " + accountsModel.toString());
