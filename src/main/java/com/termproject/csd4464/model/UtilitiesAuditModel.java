@@ -9,7 +9,7 @@ import java.sql.Date;
  * @author abhinavmittal
  *
  */
-public class UtilitiesAuditTable {
+public class UtilitiesAuditModel {
 
 	private Long utilityAuditId;
 

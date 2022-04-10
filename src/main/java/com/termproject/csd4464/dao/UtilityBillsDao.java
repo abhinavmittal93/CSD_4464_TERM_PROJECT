@@ -9,11 +9,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import com.termproject.csd4464.model.UtilityBillsModel;
+import com.termproject.csd4464.utils.Constants;
 
 /**
  * @author abhinavmittal
@@ -44,7 +47,7 @@ public class UtilityBillsDao {
 
 	public int updateUtilityBill(String status, Date updateDate, long utilityBillId) {
 		System.out.println("updateUtilityBill() begins, status: " + status + ", updateDate: " + updateDate);
-		String sql = "UPDATE utility_bills SET status = " + status + ", paid_on = '" + updateDate
+		String sql = "UPDATE utility_bills SET status = '" + status + "', paid_on = '" + updateDate
 				+ "' where utility_bill_id = " + utilityBillId;
 		return jdbcTemplate.update(sql);
 	}
@@ -64,6 +67,41 @@ public class UtilityBillsDao {
 				return utilityBillsModel;
 			}
 		});
+	}
+
+	public List<UtilityBillsModel> getUnpaidUtilityBillsByClient(long clientId) {
+		System.out.println("getUnpaidUtilityBillsByClient(): begins: clientId: " + clientId);
+		return jdbcTemplate.query(
+				"select * from utility_bills where status <> '" + Constants.UTILITIES_BILLS_PAYMENT_STATUS_PAID + "'",
+				new RowMapper<UtilityBillsModel>() {
+					public UtilityBillsModel mapRow(ResultSet rs, int row) throws SQLException {
+						UtilityBillsModel utilityBillsModel = new UtilityBillsModel();
+						utilityBillsModel.setUtilityBillId(rs.getLong(1));
+						utilityBillsModel.setUtilitiesModel(utilityDao.getUtilityById(rs.getLong(2)));
+						utilityBillsModel.setBalance(rs.getDouble(3));
+						utilityBillsModel.setStatus(rs.getString(4));
+						utilityBillsModel.setGeneratedOn(rs.getDate(5));
+						utilityBillsModel.setPaidOn(rs.getDate(6));
+						utilityBillsModel.setClientsModel(clientDao.getClientsDetailById(rs.getLong(7)));
+						return utilityBillsModel;
+					}
+				});
+	}
+
+	public UtilityBillsModel getUtilityBillById(long utilityBillId) {
+		System.out.println("getUtilityBillById() begins, utilityBillId: " + utilityBillId);
+		String sql = "select * from utility_bills where utility_bill_id=?";
+
+		try {
+			UtilityBillsModel utilityBillsModel = jdbcTemplate.queryForObject(sql,
+					new BeanPropertyRowMapper<UtilityBillsModel>(UtilityBillsModel.class),
+					new Object[] { utilityBillId });
+			utilityBillsModel.setUtilitiesModel(utilityDao.getUtilityById(utilityBillsModel.getUtilityId()));
+			
+			return utilityBillsModel;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 }

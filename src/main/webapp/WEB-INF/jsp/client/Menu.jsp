@@ -45,6 +45,7 @@
 	  <li><a href="${pageContext.request.contextPath}/transaction">Make Transactions</a></li>
 	  <li><a href="${pageContext.request.contextPath}/transaction/history">Transaction History</a></li>
 	   <li><a href="${pageContext.request.contextPath}/client/utilities/bills">Pay Bills</a></li>
+	    <li><a href="${pageContext.request.contextPath}/client/utilities/bills/history">Bills History</a></li>
 	  <li style="float:right"><a href="${pageContext.request.contextPath}/client/logout">Logout</a></li>
 	</ul>
 </body>

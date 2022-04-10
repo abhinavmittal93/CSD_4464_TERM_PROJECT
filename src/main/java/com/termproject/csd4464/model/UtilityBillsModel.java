@@ -13,6 +13,8 @@ public class UtilityBillsModel {
 
 	private Long utilityBillId;
 
+	private Long utilityId;
+
 	private UtilitiesModel utilitiesModel;
 
 	private Double balance;
@@ -139,11 +141,25 @@ public class UtilityBillsModel {
 		this.clientsModel = clientsModel;
 	}
 
+	/**
+	 * @return the utilityId
+	 */
+	public Long getUtilityId() {
+		return utilityId;
+	}
+
+	/**
+	 * @param utilityId the utilityId to set
+	 */
+	public void setUtilityId(Long utilityId) {
+		this.utilityId = utilityId;
+	}
+
 	@Override
 	public String toString() {
-		return "UtilityBillsModel [utilityBillId=" + utilityBillId + ", utilitiesModel=" + utilitiesModel + ", balance="
-				+ balance + ", status=" + status + ", generatedOn=" + generatedOn + ", paidOn=" + paidOn + ", clientId="
-				+ clientId + ", clientsModel=" + clientsModel + "]";
+		return "UtilityBillsModel [utilityBillId=" + utilityBillId + ", utilityId=" + utilityId + ", utilitiesModel="
+				+ utilitiesModel + ", balance=" + balance + ", status=" + status + ", generatedOn=" + generatedOn
+				+ ", paidOn=" + paidOn + ", clientId=" + clientId + ", clientsModel=" + clientsModel + "]";
 	}
 
 }

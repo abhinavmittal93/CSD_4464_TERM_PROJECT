@@ -152,9 +152,10 @@ public class TransactionController {
 
 			// check if the account has sufficient funds
 			if (transferFromAccountsModel.getBalance() < transactionModel.getBalance()) {
-				m.addAttribute("message", "You do not have sufficient funds.");
 				transactionsAuditModel.setStatus(Constants.TRANSACTION_STATUS_FAILED);
 				transactionsAuditModel.setReasonCode(Constants.TRANSACTION_REASON_CODE_INSUFF_FUNDS);
+				System.err.println("The selected account has insufficient funds.");
+				m.addAttribute("message", "The selected account has insufficient funds.");
 				return "redirect:/transaction/history";
 			}
 
@@ -224,6 +225,8 @@ public class TransactionController {
 			if (transferFromAccountsModel.getBalance() < transactionModel.getBalance()) {
 				transactionsAuditModel.setStatus(Constants.TRANSACTION_STATUS_FAILED);
 				transactionsAuditModel.setReasonCode(Constants.TRANSACTION_REASON_CODE_INSUFF_FUNDS);
+				System.err.println("The selected account has insufficient funds.");
+				m.addAttribute("message", "The selected account has insufficient funds.");
 				return "redirect:/transaction/history";
 			}
 
@@ -346,6 +349,8 @@ public class TransactionController {
 			if (withdrawAccountModel.getBalance() < transactionModel.getBalance()) {
 				transactionsAuditModel.setStatus(Constants.TRANSACTION_STATUS_FAILED);
 				transactionsAuditModel.setReasonCode(Constants.TRANSACTION_REASON_CODE_INSUFF_FUNDS);
+				System.err.println("The selected account has insufficient funds.");
+				m.addAttribute("message", "The selected account has insufficient funds.");
 				return "redirect:/transaction/history";
 			}
 
