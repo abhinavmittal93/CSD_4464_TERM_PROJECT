@@ -21,9 +21,9 @@
 	<bean id="ds"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value=" com.mysql.cj.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5483631"></property>
-		<property name="username" value="sql5483631"></property>
-		<property name="password" value="SDKIXDvQpi"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/termproject"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
 	</bean>
 
 	<bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
