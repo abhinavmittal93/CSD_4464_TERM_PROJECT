@@ -25,7 +25,7 @@ import com.termproject.csd4464.model.TransactionsAuditModel;
 import com.termproject.csd4464.utils.Constants;
 
 /**
- * @author abhinavmittal
+ * @author abhinavmittal, aarti, samridhi, navdeep
  * 
  * This controller handles all the requests related to the transactions,
  * such as Self Transfer, Transfer to other client, Deposit Money, Withdrawing money.

@@ -32,7 +32,7 @@ import com.termproject.csd4464.model.UtilityBillsModel;
 import com.termproject.csd4464.utils.Constants;
 
 /**
- * @author abhinavmittal
+ * @author abhinavmittal, aarti
  * 
  * This controller handles all the requests related to the Utility Bills of a client,
  * such as displaying all the bills, paying a bill

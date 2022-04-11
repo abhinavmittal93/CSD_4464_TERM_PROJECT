@@ -26,7 +26,7 @@ import com.termproject.csd4464.model.UtilityBillsModel;
 import com.termproject.csd4464.utils.Constants;
 
 /**
- * @author abhinavmittal
+ * @author abhinavmittal, aarti
  * 
  * This controller handles the requests related to the Utility Bills for a client,
  * such as, creating a new utility bill.

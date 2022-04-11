@@ -20,7 +20,7 @@ import com.termproject.csd4464.model.BankTypesModel;
 import com.termproject.csd4464.model.ClientsModel;
 
 /**
- * @author abhinavmittal
+ * @author abhinavmittal, aarti, samridhi, navdeep
  * 
  * This is a DAO class which handles the Database queries related to "accounts" table 
  * and transform the retrieved data and return to AccountsController.
