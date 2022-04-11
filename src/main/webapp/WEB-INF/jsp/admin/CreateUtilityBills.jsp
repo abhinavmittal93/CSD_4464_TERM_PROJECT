@@ -18,6 +18,14 @@
 </head>
 <body align="center">
 	<h1>Create Utility Bills</h1>
+	<c:choose>
+			<c:when test="${param.status eq 'success'}">
+				<span style="color:green;"><c:out value="${param.message}"/></span>
+			</c:when>
+			<c:otherwise>
+				<span style="color:red;"><c:out value="${param.message}"/></span>
+			</c:otherwise>
+		</c:choose>
 	<hr>
 	<div class="middle">
 		<form:form method="post" action="${pageContext.request.contextPath}/admin/utilities/bills/create">
