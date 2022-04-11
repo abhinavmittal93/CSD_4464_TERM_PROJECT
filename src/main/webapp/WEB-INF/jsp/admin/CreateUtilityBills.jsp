@@ -54,7 +54,7 @@
 				<tr>
 					<td></td>
 					<td>
-						<input type="submit" value="Create Account" />
+						<input type="submit" value="Create Bill" />
 					</td>
 				</tr>
 			</table>
