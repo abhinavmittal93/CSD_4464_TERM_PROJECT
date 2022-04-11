@@ -83,7 +83,7 @@ public class UtilityBillsDao {
 	 */
 	public List<UtilityBillsModel> getUtilityBillsByClient(long clientId) {
 		System.out.println("getUtilityBillsByClient(): begins: clientId: " + clientId);
-		return jdbcTemplate.query("select * from utility_bills", new RowMapper<UtilityBillsModel>() {
+		return jdbcTemplate.query("select * from utility_bills where client_id = " + clientId, new RowMapper<UtilityBillsModel>() {
 			public UtilityBillsModel mapRow(ResultSet rs, int row) throws SQLException {
 				UtilityBillsModel utilityBillsModel = new UtilityBillsModel();
 				utilityBillsModel.setUtilityBillId(rs.getLong(1));
@@ -112,7 +112,7 @@ public class UtilityBillsDao {
 	public List<UtilityBillsModel> getUnpaidUtilityBillsByClient(long clientId) {
 		System.out.println("getUnpaidUtilityBillsByClient(): begins: clientId: " + clientId);
 		return jdbcTemplate.query(
-				"select * from utility_bills where status <> '" + Constants.UTILITIES_BILLS_PAYMENT_STATUS_PAID + "'",
+				"select * from utility_bills where status <> '" + Constants.UTILITIES_BILLS_PAYMENT_STATUS_PAID + "' and client_id = " + clientId,
 				new RowMapper<UtilityBillsModel>() {
 					public UtilityBillsModel mapRow(ResultSet rs, int row) throws SQLException {
 						UtilityBillsModel utilityBillsModel = new UtilityBillsModel();

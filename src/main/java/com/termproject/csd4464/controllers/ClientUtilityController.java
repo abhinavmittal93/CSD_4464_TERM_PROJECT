@@ -124,7 +124,7 @@ public class ClientUtilityController {
 	 * 
 	 * It updates the status of bill to paid.
 	 * It inserts a transaction history for the related account.
-	 * Also, it inserts a record in utilities_audit table, which has all the paid bills hidtory. 
+	 * Also, it inserts a record in utilities_audit table, which has all the paid bills history. 
 	 * 
 	 * @param m
 	 * @param request
