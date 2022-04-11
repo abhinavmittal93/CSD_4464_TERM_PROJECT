@@ -140,7 +140,7 @@ public class ClientDao {
 		String sql = "UPDATE clients SET first_name = '" + clientsModel.getFirstName() + "', last_name = '"
 				+ clientsModel.getLastName() + "', gender = '" + clientsModel.getGender() + "', email = '"
 				+ clientsModel.getEmail() + "', phone = '" + clientsModel.getPhone() + "', password = '"
-				+ clientsModel.getMd5Password() + "'";
+				+ clientsModel.getMd5Password() + "' where username = '" + clientsModel.getUsername() +"'";
 
 		return jdbcTemplate.update(sql);
 	}
